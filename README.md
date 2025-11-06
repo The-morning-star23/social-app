@@ -4,8 +4,7 @@ A full‑stack MERN application built for the 3W Full‑Stack Internship assignm
 Simple social feed where users can sign up, create posts (text + images), like, and comment.
 
 Live Demo
-- Frontend (Vercel): YOUR_FRONTEND_URL_HERE
-- Backend (Render): YOUR_BACKEND_URL_HERE
+- Frontend (Vercel):(https://social-app-gamma-liard.vercel.app)
 
 ## Features
 - User authentication (signup / login)
@@ -39,7 +38,7 @@ Live Demo
 
 1. Clone
 ```bash
-git clone https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git
+git clone https://github.com/The-morning-star23/social-app.git
 cd YOUR_REPO_NAME
 ```
 
