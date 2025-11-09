@@ -1,5 +1,7 @@
 const cloudinary = require('cloudinary').v2;
 const multer = require('multer');
+// Import the 'streamifier' package
+const streamifier = require('streamifier');
 
 // Configure Cloudinary
 cloudinary.config({
@@ -8,33 +10,22 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// --- Enhanced Debugging Log ---
-// We log the cloud_name and api_key. We NEVER log the API_SECRET.
-console.log('Cloudinary Config Initialized.');
-console.log(`Cloud Name: ${process.env.CLOUDINARY_CLOUD_NAME ? 'Loaded' : 'MISSING'}`);
-console.log(`API Key: ${process.env.CLOUDINARY_API_KEY ? 'Loaded' : 'MISSING'}`);
-console.log(`API Secret: ${process.env.CLOUDINARY_API_SECRET ? 'Loaded' : 'MISSING'}`);
-// ---------------------------------
-
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });
 
 const uploadToCloudinary = (fileBuffer) => {
   return new Promise((resolve, reject) => {
-    console.log('Attempting to upload file to Cloudinary...');
+    // Use streamifier to create a read stream from the buffer
     const stream = cloudinary.uploader.upload_stream(
       { folder: 'social-app' },
       (error, result) => {
         if (result) {
-          console.log('Cloudinary upload successful.');
           resolve(result);
         } else {
-          console.error('Cloudinary upload error:', error);
           reject(error);
         }
       }
     );
-    const streamifier = require('streamifier');
     streamifier.createReadStream(fileBuffer).pipe(stream);
   });
 };
